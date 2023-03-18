@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio 5</title>
+    <script src="https://kit.fontawesome.com/9be718e507.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <script type="application/javascript">
+        document.body.style.margin = '0';
+        document.body.style.padding = '0';
+        document.body.style.height = '100vh';
+        document.body.style.display = 'flex';
+        document.body.style.flexDirection = 'column';
+
+        const url = 'https://www.google.com';
+        //------------------HEADER------------------ 
+        const title = document.createElement('h1');
+        title.textContent = 'WallyChat';
+        title.style.textAlign = 'center';
+        title.style.color = '#d8d7d6';
+
+        const labelUser = document.createElement('label');
+        labelUser.setAttribute('for', 'user');
+        labelUser.textContent = 'USER:';
+        labelUser.style.color = '#d8d7d6';
+
+        const inputUser = document.createElement('input');
+        inputUser.setAttribute('id', 'user');
+        inputUser.setAttribute('value', 'macosofty')
+        inputUser.type = 'text';
+        inputUser.style.border = 'none';
+        inputUser.style.borderRadius = '40px';
+        inputUser.style.padding = '5px 10px';
+        inputUser.style.margin = '10px';
+        inputUser.style.fontSize = '16px';
+        inputUser.style.width = 'auto';
+
+        const actualizar = document.createElement('button');
+        actualizar.textContent = '⟲';
+        actualizar.style.fontSize = '25px';
+        actualizar.style.padding = '5px 10px';
+        actualizar.style.border = 'none';
+        actualizar.style.borderRadius = '100%';
+        actualizar.style.backgroundColor = '#1e1e1e';
+        actualizar.style.color = '#9a9a9a';
+        actualizar.style.marginLeft = '0px';
+
+        const header = document.createElement('header');
+        header.style.height = '120px';
+        header.style.backgroundColor = '#1e1e1e';
+        header.style.padding = '10px';
+
+        header.append(title);
+        header.append(labelUser);
+        header.append(inputUser);
+        header.append(actualizar);
+
+        //------------------CHAT------------------
+        //---main---
+        const main = document.createElement('main');
+        main.style.backgroundColor = '#1e1e1e';
+        main.style.flexGrow = '1';
+        main.style.flexBasis = '100px';
+        main.style.minHeight = '100px';
+        main.style.overflow = 'auto';
+        main.style.minWidth = '100px';
+        main.style.maxWidth = '100vw';
+
+        const ul = document.createElement('ul');
+        ul.style.display = 'flex';
+        ul.style.flexDirection = 'column';
+        ul.style.wordWrap = 'break-word';
+        ul.style.margin = '0';
+        ul.style.padding = '0';
+        
+        
+
+        main.append(ul);
+        
+
+        //------------------FOOTER------------------
+        const footer = document.createElement('footer');
+        footer.style.height = '30px';
+        footer.style.backgroundColor = '#1e1e1e';
+        footer.style.padding = '10px';
+        footer.style.display = 'flex';
+        footer.style.alignItems = 'center';
+        footer.style.justifyContent = 'center';        
+        
+        const inputMessage = document.createElement('input');
+        inputMessage.setAttribute('placeholder', 'Type your message here...');
+        inputMessage.setAttribute('id', 'message');
+        inputMessage.style.fontSize = '16px';
+        inputMessage.style.padding = '5px 10px';
+        inputMessage.style.width = '350px';
+        // inputMessage.style.borderRadius = '5px';
+        inputMessage.style.margin = '5px';
+        inputMessage.style.placeHolder = '';
+        inputMessage.style.backgroundColor = '#1e1e1e';
+        inputMessage.style.color = 'white';
+        // inputMessage.style.borderColor = '#9a9a9a';
+        
+        const button = document.createElement('button');
+        button.textContent = '↑';
+        button.style.fontSize = '16px';
+        button.style.padding = '5px 10px';
+        button.style.border = 'none';
+        button.style.borderRadius = '100%';
+        button.style.backgroundColor = '#1e1e1e';
+        button.style.color = '#9a9a9a';
+        button.style.marginLeft = '10px';
+
+        const limit = document.createElement('div');
+        limit.style.fontSize = '16px';
+        limit.style.color = '#ff5f57';
+        
+
+
+        inputMessage.addEventListener("input", () => {
+            if ((inputMessage.value.length > 140)) {
+                limit.style.display = 'inline';
+                limit.textContent = 140 - inputMessage.value.length;
+            } else {
+                limit.style.display = 'none';
+            }
+            
+        });
+        
+
+        const container = document.createElement('div');
+        
+        
+        Object.assign(container.style, {
+            alignItems: 'center',
+            justifyContent: 'center',
+            display: 'flex',
+            flexDirection: 'row',
+            backgroundColor: '#1e1e1e',
+            borderRadius: '10px',
+            border: '1px solid #9a9a9a',
+        })
+
+
+        container.append(inputMessage);
+        container.append(limit);
+        container.append(button);
+                
+        footer.append(container);
+
+
+        //------------------FUNCTIONS------------------
+        const Message = (text, user) => {
+            const li = document.createElement('li')
+            li.style.listStyle = 'none';
+            li.style.padding = '10px';
+            li.style.margin = '10px';
+            li.style.borderRadius = '10px';
+            li.style.width = 'fit-content';
+            li.style.maxWidth = '50%';
+            li.style.color = '#e1e1e1';
+    
+            const userSpan = document.createElement('span')
+            userSpan.append(`${user} `)
+            Object.assign(userSpan.style, {
+                fontSize: '12px', 
+                color: '#9a9a9a',
+                fontFamily: 'Helvetica Neue',
+                marginLeft: '5px',
+            })
+
+            const div = document.createElement('div')
+            Object.assign(div.style, {
+                borderRadius: '20px',
+            })
+
+            const divMessage = document.createElement('div')
+            Object.assign(divMessage.style, {
+                fontSize: '16px', 
+                fontFamily: 'Helvetica Neue',
+                // borderRadius: '40px',
+                padding: '10px',
+                margin: '5px',
+                fontSize: '16px',
+                width: 'auto',
+                overflow: 'hidden',
+                wordWrap: 'break-word',
+            })
+            divMessage.append(text)
+            div.append(divMessage)
+
+            if (user === inputUser.value){
+                Object.assign(div.style ,{
+                    backgroundColor: '#0b84ff',
+                    color: '#e1e1e1',
+                })
+                userSpan.style.display = 'none';
+
+                li.append(userSpan)
+                li.append(div)
+            } else {
+                Object.assign(div.style ,{
+                    backgroundColor: '#9a9a9a',
+                    color: '#e1e1e1',
+                })
+                li.append(userSpan)
+                li.append(div)
+            }
+
+            if (text.match(/^http[^\?]*.(jpg|jpeg|gif|png|tiff|bmp)(\?(.*))?$/gmi)){
+                divMessage.style.display = 'none';
+            }
+
+            if (li.offsetWidth > 100){
+                li.style.borderRadius = '10px'
+                // li.style.backgroundColor = '#1e1e1e';
+            }
+            
+            return li
+        }
+
+        const getMessages = async () => {
+            const response = await fetch('http://uvgenios.online/api/messages')
+            const messages = await response.json()
+
+            const lis = messages.map((message) => Message(message.text, message.user))
+
+            lis.forEach((li) => ul.append(li))
+            lis.forEach((li) => {
+                if (li.textContent.split(' ')[1].match(/^http[^\?]*.(jpg|jpeg|gif|png|tiff|bmp)(\?(.*))?$/gmi)) {
+                    const div = document.createElement('div')
+                    const img = document.createElement('img')
+
+                    Object.assign(img.style, {
+                        
+                        width: '250px',
+                        borderRadius: '20px',
+                        margin: '10px',
+                        
+                    })
+
+                    img.src = li.textContent.split(' ')[1];
+                    div.append(img)
+                    li.append(div)
+                } else if (li.textContent.split(' ')[1].match(/^https?:\/\/[^\s/$.?#].[^\s]*$/gi)) {
+                    console.log(Date.now())
+                    const div = document.createElement('div')
+                    const img = document.createElement('img')
+
+                    Object.assign(img.style, {
+                        
+                        width: '250px',
+                        borderRadius: '20px',
+                        margin: '10px',
+                        
+                    })
+                    
+                    const urlRequestFromUser = 'https://www.google.com'//li.textContent.split(' ')[1];
+                    
+                    img.src = 'https://www.google.com/s2/favicons?sz=64&domain=https://www.google.com';
+                    
+                    
+                    let solicitudRealizada = false;
+                    //no se como limitar a solo hacer una soliitud por cada url, porque se realizan 33 en 2 segundos y la API no jala cuando es asi
+                    const hacerSolicitud = async () => {
+                        if (!solicitudRealizada) {
+                            const apiKey = '1c40c803fcccc31624791d10e7f9e9f9';
+                            const endpoint = `https://api.linkpreview.net?key=${apiKey}&q=https://www.google.com`;
+
+                            fetch(endpoint)
+                            .then(response => response.json())
+                            .then(data => {
+                                // Aquí puedes usar la información obtenida para crear una vista previa de la página web
+                                console.log(data);
+                            })
+                            .catch(error => console.log(error));
+                            solicitudRealizada = true;
+                        }
+                    }
+
+                    // Llamar a hacerSolicitud después de 2 segundos
+                    setTimeout(hacerSolicitud, 2000);
+
+                    setInterval(() => {
+                        
+
+                    }, 2000);
+
+                                        
+                    div.append(img)
+                    li.append(div)
+                }
+
+                if (li.textContent.includes(inputUser.value)) {
+                    // li.style.backgroundColor = '#0b84ff';
+                    // li.style.color = 'white';
+                    li.style.alignSelf = 'flex-end';
+                } else {
+                    // li.style.backgroundColor = '#3b3b3d';
+                    li.style.alignSelf = 'flex-start';
+                }
+            });
+            
+            // const lastMessage = lis[lis.length - 1];
+            // lastMessage.scrollIntoView();
+
+            const lastMessage = lis[lis.length - 1];
+            const scroll = document.getElementById("divMessage");
+            lastMessage.scrollIntoView({ block: 'end', behavior: 'smooth' });
+        }
+
+        const postMessage = async (text) => {
+            const body = {
+                text,
+                user: inputUser.value
+            }
+            const response = await fetch('http://uvgenios.online/api/messages', {
+                method: 'POST',
+                body: JSON.stringify(body),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            inputMessage.value = ''
+            getMessages()
+            return response
+        }
+
+        getMessages()
+
+        actualizar.addEventListener('click', async (event) => {
+            event.preventDefault()
+            ul.innerHTML = ""
+            getMessages()
+        })
+
+        inputMessage.addEventListener('keydown', async (event) => {
+            if (event.key === 'Enter') {
+                await postMessage(inputMessage.value)
+                ul.innerHTML = ""
+                divMessage.submit()
+                getMessages()
+            }
+        })
+
+        button.addEventListener('click', async (event) => {
+            event.preventDefault()
+
+            await postMessage(inputMessage.value)
+            ul.innerHTML = ""
+            getMessages()
+        })
+
+        // const autoRefresh = setInterval(() => {
+        //     ul.innerHTML = ""
+        //     getMessages()
+        // }, 1000);
+
+        // setInterval(getMessages, 5000);
+
+        document.body.append(header);
+        document.body.append(main);
+        document.body.append(footer);          
+    </script>
+</body>
+</html>
